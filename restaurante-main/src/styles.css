@@ -1,0 +1,186 @@
+/* Design System by Lorenzo Fabres */
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --font-display: "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --radius: 0.5rem;
+  /* Dark luxury palette with warm amber/gold accents */
+  --background: oklch(0.16 0.012 60);
+  --foreground: oklch(0.96 0.012 80);
+  --card: oklch(0.20 0.014 60);
+  --card-foreground: oklch(0.96 0.012 80);
+  --popover: oklch(0.20 0.014 60);
+  --popover-foreground: oklch(0.96 0.012 80);
+  --primary: oklch(0.78 0.13 75);          /* warm gold */
+  --primary-foreground: oklch(0.14 0.012 60);
+  --secondary: oklch(0.24 0.016 60);
+  --secondary-foreground: oklch(0.96 0.012 80);
+  --muted: oklch(0.24 0.014 60);
+  --muted-foreground: oklch(0.72 0.02 80);
+  --accent: oklch(0.78 0.13 75);
+  --accent-foreground: oklch(0.14 0.012 60);
+  --destructive: oklch(0.58 0.22 27);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.30 0.014 60 / 0.6);
+  --input: oklch(0.30 0.014 60);
+  --ring: oklch(0.78 0.13 75);
+  --gold: oklch(0.82 0.14 78);
+  --gold-soft: oklch(0.88 0.08 80);
+}
+
+.dark { color-scheme: dark; }
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    background-image:
+      radial-gradient(ellipse 80% 60% at 50% -10%, oklch(0.78 0.13 75 / 0.08), transparent 60%),
+      radial-gradient(ellipse 60% 50% at 100% 100%, oklch(0.78 0.13 75 / 0.05), transparent 60%);
+  }
+  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.01em; }
+}
+
+@layer utilities {
+  .font-display { font-family: var(--font-display); }
+  .text-gold { color: var(--gold); }
+  .bg-gold { background-color: var(--gold); }
+  .glass {
+    background: oklch(0.20 0.014 60 / 0.55);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    border: 1px solid oklch(0.78 0.13 75 / 0.18);
+  }
+  .gold-gradient-text {
+    background: linear-gradient(135deg, oklch(0.92 0.10 85), oklch(0.75 0.15 70), oklch(0.92 0.10 85));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .divider-gold {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, oklch(0.78 0.13 75 / 0.6), transparent);
+  }
+  .hover-lift {
+    transition: transform 400ms cubic-bezier(0.22,1,0.36,1), box-shadow 400ms;
+  }
+  .hover-lift:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 30px 60px -20px oklch(0.78 0.13 75 / 0.25);
+  }
+  .btn-gold {
+    position: relative;
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 0.95rem 2rem;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: oklch(0.14 0.012 60);
+    background: linear-gradient(135deg, oklch(0.88 0.10 82), oklch(0.74 0.14 72));
+    border-radius: 999px;
+    overflow: hidden;
+    transition: transform 350ms cubic-bezier(0.22,1,0.36,1), box-shadow 350ms;
+    box-shadow: 0 10px 30px -10px oklch(0.78 0.13 75 / 0.5);
+  }
+  .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 20px 40px -10px oklch(0.78 0.13 75 / 0.65); }
+  .btn-gold::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(120deg, transparent 30%, oklch(1 0 0 / 0.35) 50%, transparent 70%);
+    transform: translateX(-100%);
+    transition: transform 700ms;
+  }
+  .btn-gold:hover::after { transform: translateX(100%); }
+
+  .btn-outline-gold {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 0.9rem 1.9rem;
+    font-size: 0.75rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid oklch(0.78 0.13 75 / 0.5);
+    border-radius: 999px;
+    transition: all 300ms ease;
+  }
+  .btn-outline-gold:hover {
+    background: oklch(0.78 0.13 75 / 0.1);
+    border-color: var(--gold);
+    color: oklch(0.92 0.10 85);
+  }
+  .eyebrow {
+    font-size: 0.7rem; letter-spacing: 0.4em; text-transform: uppercase;
+    color: var(--gold); font-weight: 500;
+  }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  /* Signature credit — elegant hover reveal */
+  .signature-link {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
+    opacity: 0.35;
+    transition: opacity 0.5s ease, color 0.5s ease;
+    text-decoration: none;
+    position: relative;
+  }
+  .signature-link:hover {
+    opacity: 1;
+    color: var(--gold);
+  }
+  .signature-link::after {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .signature-link:hover::after {
+    width: 100%;
+  }
+}
+
+/* Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap");
